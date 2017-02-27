@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - media_entity_image
-id: image
+id: wildcat_image
 label: Image
 description: 'Use Image for uploading locally hosted images.'
 type: image
