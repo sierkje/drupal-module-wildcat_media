@@ -1,0 +1,9 @@
+name: 'Wildcat Media Document'
+type: module
+description: 'Support for uploaded documents as media entities on Wildcat-flavored sites.'
+core: 8.x
+package: Wildcat
+dependencies:
+  - dropzonejs_eb_widget
+  - media_entity_document
+  - wildcat_media

@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_media_reusable
+    - media_entity.bundle.wildcat_gallery
+id: media.wildcat_gallery.wildcat_media_reusable
+field_name: wildcat_media_reusable
+entity_type: media
+bundle: wildcat_gallery
+label: 'Save to my media library'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: 'Saved to my media library'
+  off_label: 'Not in my media library'
+field_type: boolean

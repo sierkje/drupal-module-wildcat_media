@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Support for videos as media entities on Wildcat-flavored sites.
+ */
+
+use Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\media_entity\Entity\MediaBundle;
+
+/**
+ * Implements hook_modules_installed().
+ */
+function wildcat_media_video_modules_installed($modules) {
+  if (in_array('wildcat_media_gallery', $modules)) {
+    if (MediaBundle::load('wildcat_video')) {
+      if ($browser = EntityBrowser::load('wildcat_gallery')) {
+        // Add our widget to the wildcat_gallery browser.
+        $config = _wildcat_media_video_browser_widget_config(-7);
+        if ($uuid = $browser->addWidget($config)) {
+          \Drupal::configFactory()->getEditable('wildcat_media_video.settings')
+            ->set('wildcat_gallery_uuid', $uuid)
+            ->save();
+        }
+        $browser->save();
+      }
+    }
+  }
+}
+
+/**
+ * Returns the configuration for the video embed entity browser widget.
+ *
+ * @param int $weight
+ *   Optional weight.
+ *
+ * @return array
+ *   The widget configuration array.
+ */
+function _wildcat_media_video_browser_widget_config($weight = 0) {
+  return [
+    'id' => 'entity_form',
+    'label' => 'Add video',
+    'weight' => (int) $weight,
+    'settings' => [
+      'entity_type' => 'media',
+      'bundle' => 'wildcat_video',
+      'form_mode' => 'default',
+      'submit_text' => 'Save video',
+    ],
+  ];
+}

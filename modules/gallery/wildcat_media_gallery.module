@@ -1,0 +1,89 @@
+<?php
+
+/**
+ * @file
+ * Support for media entity galleries or slideshows on Wildcat-flavored sites.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\media_entity\MediaBundleInterface;
+use Drupal\views\Entity\View;
+
+/**
+ * Implements hook_form_alter().
+ */
+function wildcat_media_gallery_form_alter(&$form, FormStateInterface &$form_state) {
+  // Remove the Gallery option from create gallery view's bundle filters.
+  if (in_array($form['#id'], [
+    'views-exposed-form-wildcat-media-gallery-library-media-select-modal',
+    'views-exposed-form-wildcat-media-gallery-library-user-media-select-modal',
+  ])) {
+    unset($form['bundle_1']['#options']['gallery']);
+  }
+
+  if ($form['#form_id'] == 'media_wildcat_gallery_form') {
+    $form['#attached']['library'][] = 'wildcat_media/view';
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function wildcat_media_entity_type_alter(array &$entity_types) {
+  $field_name = \Drupal::config('media_entity.bundle.wildcat_gallery')
+    ->get('type_configuration.source_field');
+  $entity_types['media']
+    ->addConstraint('WildcatMediaGalleryBundle', [
+      'sourceFieldName' => $field_name,
+    ]);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function wildcat_media_gallery_media_bundle_insert(MediaBundleInterface $bundle) {
+  // Add cache tags for the new bundle to the gallery library view.
+  if ($view = View::load('wildcat_media_gallery_library')) {
+    /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
+    $displays = $view->get('display');
+
+    foreach ($displays as $display_id => $display_info) {
+      $display = $view->getDisplay($display_id);
+      $existing_tags = &$display['cache_metadata']['tags'];
+      $new_tags = [
+        "config:core.entity_view_display.media.{$bundle->id()}.default",
+        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
+      ];
+      foreach ($new_tags as $new_tag) {
+        if (!in_array($new_tag, $existing_tags)) {
+          $existing_tags[] = $new_tag;
+        }
+      }
+    }
+
+    $view->save();
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle) {
+  // Remove cache tags for the deleted bundle from the gallery library view.
+  if ($view = View::load('wildcat_media_gallery_library')) {
+    /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
+    $displays = $view->get('display');
+
+    foreach ($displays as $display_id => $display_info) {
+      $display = $view->getDisplay($display_id);
+      $existing_tags = &$display['cache_metadata']['tags'];
+      $deleted_tags = [
+        "config:core.entity_view_display.media.{$bundle->id()}.default",
+        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
+      ];
+      $existing_tags = array_diff($existing_tags, $deleted_tags);
+    }
+
+    $view->save();
+  }
+}

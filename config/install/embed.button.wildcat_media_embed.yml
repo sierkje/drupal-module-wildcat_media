@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'file:file:94dc2d93-bfc7-4451-a3a1-9ccf142aaf51'
+  module:
+    - entity_embed
+    - media_entity
+label: Media
+id: wildcat_media_embed
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles: {  }
+  display_plugins: {  }
+  entity_browser: wildcat_media_embed
+  entity_browser_settings:
+    display_review: false
+icon_uuid: 94dc2d93-bfc7-4451-a3a1-9ccf142aaf51

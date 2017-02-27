@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - video_embed_media
+id: wildcat_video
+label: 'Video'
+description: 'Use <em>Video</em> for embedding external hosted videos (by YouTube, Vimeo, etc.).'
+type: video_embed_field
+queue_thumbnail_downloads: false
+new_revision: true
+type_configuration:
+  source_field: wildcat_video
+field_map:
+  id: wildcat_video_id
+  source_name: wildcat_video_source

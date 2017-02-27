@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.wildcat_media_library
+  module:
+    - media_entity
+    - views
+name: wildcat_media_embed
+label: 'Media Embed'
+display: iframe
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select media'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  3890425d-604f-47d8-befd-7dee2444de65:
+    settings:
+      view: wildcat_media_library
+      view_display: media_select_modal
+      submit_text: 'Select media'
+    uuid: 3890425d-604f-47d8-befd-7dee2444de65
+    weight: 1
+    label: 'All media'
+    id: view
+  0a1c0b6a-ef29-4de6-a866-a8d372efac0b:
+    settings:
+      view: wildcat_media_library
+      view_display: user_media_select_modal
+      submit_text: 'Select media'
+    uuid: 0a1c0b6a-ef29-4de6-a866-a8d372efac0b
+    weight: 2
+    label: 'My media'
+    id: view

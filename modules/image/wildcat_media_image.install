@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * @file
+ * Contains backup and update routines for Wildcat Media Image.
+ */
+
+use Drupal\entity_browser\Entity\EntityBrowser;
+
+/**
+ * Implements hook_install().
+ */
+function wildcat_media_image_install() {
+  $settings = \Drupal::configFactory()
+    ->getEditable('wildcat_media_image.settings');
+
+  // Add our widget to the wildcat_media_embed browser.
+  if ($embed_browser = EntityBrowser::load('wildcat_media_embed')) {
+    $embed_config = _wildcat_media_image_browser_widget_config(3);
+    if ($embed_uuid = $embed_browser->addWidget($embed_config)) {
+      $settings->set('wildcat_media_embed_uuid', $embed_uuid);
+    }
+    $embed_browser->save();
+  }
+
+  // Add our widget to the wildcat_media_library browser.
+  if ($library_browser = EntityBrowser::load('wildcat_media_library')) {
+    $library_config = _wildcat_media_image_browser_widget_config(0);
+    if ($library_uuid = $library_browser->addWidget($library_config)) {
+      $settings->set('wildcat_media_library_uuid', $library_uuid);
+    }
+    $library_browser->save();
+  }
+
+  $settings->save();
+
+  // If the gallery module exists, add our widget to its browser.
+  if (\Drupal::moduleHandler()->moduleExists('wildcat_media_gallery')) {
+    wildcat_media_image_modules_installed(['wildcat_media_gallery']);
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wildcat_media_image_uninstall() {
+  // Remove our widgets from entity browsers.
+  $settings = \Drupal::configFactory()->get('wildcat_media_image.settings');
+  $browser_ids = [
+    'wildcat_gallery',
+    'wildcat_media_embed',
+    'wildcat_media_library',
+  ];
+
+  foreach ($browser_ids as $browser_id) {
+    $settings_key = $browser_id . '_uuid';
+    if ($uuid = $settings->get($settings_key)) {
+      if ($browser = EntityBrowser::load($browser_id)) {
+        if ($widget = $browser->getWidget($uuid)) {
+          $browser->deleteWidget($widget);
+        }
+      }
+    }
+  }
+}

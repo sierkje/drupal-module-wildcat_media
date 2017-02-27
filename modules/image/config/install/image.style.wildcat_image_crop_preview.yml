@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: wildcat_image_crop_preview
+label: 'Media Crop Preview'
+effects:
+  dd2a2513-ef5a-41b6-8c33-6e0be2869b5a:
+    uuid: dd2a2513-ef5a-41b6-8c33-6e0be2869b5a
+    id: image_scale
+    weight: 1
+    data:
+      width: 800
+      height: null
+      upscale: false

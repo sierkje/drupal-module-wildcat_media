@@ -1,0 +1,55 @@
+<?php
+
+/**
+ * @file
+ * Support for uploaded images as media entities on Wildcat-flavored sites.
+ */
+
+use Drupal\Component\Utility\Bytes;
+use Drupal\entity_browser\Entity\EntityBrowser;
+use Drupal\media_entity\Entity\MediaBundle;
+
+/**
+ * Implements hook_modules_installed().
+ */
+function wildcat_media_image_modules_installed($modules) {
+  if (in_array('wildcat_media_gallery', $modules)) {
+    if (MediaBundle::load('wildcat_image')) {
+      if ($browser = EntityBrowser::load('wildcat_gallery')) {
+        // Add our widget to the wildcat_gallery browser.
+        $config = _wildcat_media_image_browser_widget_config(-8);
+        if ($uuid = $browser->addWidget($config)) {
+          \Drupal::configFactory()->getEditable('wildcat_media_image.settings')
+            ->set('wildcat_gallery_uuid', $uuid)
+            ->save();
+        }
+        $browser->save();
+      }
+    }
+  }
+}
+
+/**
+ * Returns the configuration for the image upload entity browser widget.
+ *
+ * @param int $weight
+ *   Optional weight.
+ *
+ * @return array
+ *   The widget configuration array.
+ */
+function _wildcat_media_image_browser_widget_config($weight = 0) {
+  return [
+    'id' => 'dropzonejs_media_entity',
+    'label' => 'Upload image(s)',
+    'weight' => (int) $weight,
+    'settings' => [
+      'media_entity_bundle' => 'wildcat_image',
+      'upload_location' => 'public://[date:custom:Y]-[date:custom:m]',
+      'dropzone_description' => 'Drag and drop files here to upload',
+      'max_filesize' => file_upload_max_size() / pow(Bytes::KILOBYTE, 2) . 'M',
+      'extensions' => 'gif jpeg jpg png',
+      'submit_text' => 'Save image(s)',
+    ],
+  ];
+}

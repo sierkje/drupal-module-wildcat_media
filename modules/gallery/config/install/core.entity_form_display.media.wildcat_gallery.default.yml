@@ -1,0 +1,42 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.wildcat_gallery.wildcat_gallery_slide
+    - field.field.media.wildcat_gallery.wildcat_media_reusable
+    - media_entity.bundle.wildcat_gallery
+  module:
+    - entity_browser
+id: media.wildcat_gallery.default
+targetEntityType: media
+bundle: wildcat_gallery
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  wildcat_gallery_slide:
+    weight: 1
+    settings:
+      entity_browser: wildcat_gallery_library
+      field_widget_display: rendered_entity
+      field_widget_edit: true
+      field_widget_remove: true
+      field_widget_display_settings:
+        view_mode: wildcat_media_library
+      open: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+  wildcat_media_reusable:
+    weight: 3
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+hidden:
+  created: true
+  uid: true

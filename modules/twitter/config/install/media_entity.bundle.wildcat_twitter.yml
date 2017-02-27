@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_twitter
+id: wildcat_twitter
+label: Tweet
+description: 'Use <em>Tweet</em> to embed content from Twitter.'
+type: twitter
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  use_twitter_api: false
+  source_field: wildcat_twitter_url
+  consumer_key: ''
+  consumer_secret: ''
+  oauth_access_token: ''
+  oauth_access_token_secret: ''
+field_map:
+  id: wildcat_twitter_id
+  user: wildcat_twitter_author

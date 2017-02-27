@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_instagram_shortcode
+    - media_entity.bundle.wildcat_instagram
+id: media.wildcat_instagram.wildcat_instagram_shortcode
+field_name: wildcat_instagram_shortcode
+entity_type: media
+bundle: wildcat_instagram
+label: 'Instagram Shortcode'
+description: 'Instagram post''s unique identifier. Ex: BHak8cShinX is the shortcode for www.instagram.com/p/BHak8cShinX/'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

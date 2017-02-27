@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Contains backup and update routines for Wildcat Media Document.
+ */
+
+use Drupal\Component\Utility\Bytes;
+use Drupal\entity_browser\Entity\EntityBrowser;
+
+/**
+ * Implements hook_install().
+ */
+function wildcat_media_document_install() {
+  // Add our widget to the wildcat_media_embed browser.
+  if ($embed_browser = EntityBrowser::load('wildcat_media_embed')) {
+    $embed_config = [
+      'id' => 'dropzonejs_media_entity',
+      'label' => 'Upload document(s)',
+      'weight' => 5,
+      'settings' => [
+        'media_entity_bundle' => 'wildcat_document',
+        'upload_location' => 'public://[date:custom:Y]-[date:custom:m]',
+        'dropzone_description' => 'Drag and drop files here to upload',
+        'max_filesize' => file_upload_max_size() / pow(Bytes::KILOBYTE, 2) . 'M',
+        'extensions' => 'csv doc docx odf odp ods odt otp ots ott pdf ppt pptx rtf txt xls xlsx',
+        'submit_text' => 'Save document(s)',
+      ],
+    ];
+    if ($embed_uuid = $embed_browser->addWidget($embed_config)) {
+      \Drupal::configFactory()->getEditable('wildcat_media_document.settings')
+        ->set('wildcat_media_embed_uuid', $embed_uuid)
+        ->save();
+    }
+    $embed_browser->save();
+  }
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function wildcat_media_document_uninstall() {
+  // Remove our widget from the wildcat_media_embed browser.
+  $settings = \Drupal::configFactory()->get('wildcat_media_document.settings');
+  if ($uuid = $settings->get('wildcat_media_embed_uuid')) {
+    if ($browser = EntityBrowser::load('wildcat_media_embed')) {
+      if ($widget = $browser->getWidget($uuid)) {
+        $browser->deleteWidget($widget);
+      }
+    }
+  }
+}

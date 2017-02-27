@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_document_size
+    - media_entity.bundle.wildcat_document
+id: media.wildcat_document.wildcat_document_size
+field_name: wildcat_document_size
+entity_type: media
+bundle: wildcat_document
+label: Size
+description: 'This field stores the size of the document file.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: byte|bytes
+field_type: integer

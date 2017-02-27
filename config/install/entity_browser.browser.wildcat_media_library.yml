@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.wildcat_media_library
+  module:
+    - views
+name: wildcat_media_library
+label: 'Media Library'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select media'
+  auto_open: true
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f:
+    settings:
+      view: wildcat_media_library
+      view_display: media_select_modal
+    uuid: 71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f
+    weight: 1
+    label: 'All Media'
+    id: view
+  5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1:
+    settings:
+      view: wildcat_media_library
+      view_display: user_media_select_modal
+    uuid: 5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1
+    weight: 3
+    label: 'My Media'
+    id: view
+submit_text: 'Select media files'

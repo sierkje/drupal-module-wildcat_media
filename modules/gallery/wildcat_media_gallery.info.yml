@@ -1,0 +1,9 @@
+name: 'Wildcat Media Gallery'
+type: module
+description: 'Support for media entity galleries or slideshows on Wildcat-flavored sites.'
+core: 8.x
+package: Wildcat
+dependencies:
+  - media_entity_slideshow
+  - slick_media
+  - wildcat_media

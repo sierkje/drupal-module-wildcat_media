@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Support for media entity galleries or slideshows on Wildcat-flavored sites.
+ */
+
+use Drupal\media_entity\Entity\MediaBundle;
+
+/**
+ * Implements hook_install().
+ */
+function wildcat_media_gallery_install() {
+  // Ensure cache tags for existing media bundles in gallery library view.
+  /** @var \Drupal\media_entity\MediaBundleInterface[] $media_bundles */
+  $media_bundles = MediaBundle::loadMultiple();
+  foreach ($media_bundles as $media_bundle) {
+    wildcat_media_gallery_media_bundle_insert($media_bundle);
+  }
+}

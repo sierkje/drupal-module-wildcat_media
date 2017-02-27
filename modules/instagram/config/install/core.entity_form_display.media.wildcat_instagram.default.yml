@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.wildcat_instagram.wildcat_instagram_shortcode
+    - field.field.media.wildcat_instagram.wildcat_instagram_url
+    - field.field.media.wildcat_instagram.wildcat_media_reusable
+    - media_entity.bundle.wildcat_instagram
+  module:
+    - link
+id: media.wildcat_instagram.default
+targetEntityType: media
+bundle: wildcat_instagram
+mode: default
+content:
+  name:
+    type: string_textfield
+    weight: -5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  wildcat_instagram_url:
+    weight: 11
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  wildcat_media_reusable:
+    weight: 12
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+hidden:
+  created: true
+  uid: true
+  wildcat_instagram_shortcode: true

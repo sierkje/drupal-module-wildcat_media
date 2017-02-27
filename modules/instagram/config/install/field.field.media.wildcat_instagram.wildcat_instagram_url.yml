@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_instagram_url
+    - media_entity.bundle.wildcat_instagram
+  module:
+    - link
+id: media.wildcat_instagram.wildcat_instagram_url
+field_name: wildcat_instagram_url
+entity_type: media
+bundle: wildcat_instagram
+label: 'Instagram URL'
+description: 'URL of the Instagram post. Example url: https://www.instagram.com/p/BHak8cShinX/'
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 16
+  title: 0
+field_type: link

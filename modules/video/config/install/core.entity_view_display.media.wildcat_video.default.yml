@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.wildcat_video.wildcat_media_reusable
+    - field.field.media.wildcat_video.wildcat_video
+    - field.field.media.wildcat_video.wildcat_video_id
+    - field.field.media.wildcat_video.wildcat_video_source
+    - media_entity.bundle.wildcat_video
+  module:
+    - user
+    - video_embed_field
+id: media.wildcat_video.default
+targetEntityType: media
+bundle: wildcat_video
+mode: default
+content:
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  wildcat_video:
+    type: video_embed_wildcat_video
+    weight: 3
+    label: hidden
+    settings:
+      responsive: true
+      width: 854
+      height: 480
+      autoplay: true
+    third_party_settings: {  }
+hidden:
+  created: true
+  thumbnail: true
+  uid: true
+  wildcat_media_reusable: true
+  wildcat_video_id: true
+  wildcat_video_source: true

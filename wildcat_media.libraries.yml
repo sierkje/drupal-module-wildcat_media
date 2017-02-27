@@ -1,0 +1,10 @@
+view:
+  version: VERSION
+  js:
+    js/wildcat_media.view.js: {}
+  css:
+    theme:
+      css/wildcat_media.view.css: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

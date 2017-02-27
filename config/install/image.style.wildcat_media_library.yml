@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: wildcat_media_library
+label: 'Media library item'
+effects:
+  c78a7bf8-61f5-4fc0-8226-e377f4b99a06:
+    uuid: c78a7bf8-61f5-4fc0-8226-e377f4b99a06
+    id: image_scale
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      upscale: true

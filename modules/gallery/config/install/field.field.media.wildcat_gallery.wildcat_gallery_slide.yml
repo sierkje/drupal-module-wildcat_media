@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_gallery_slide
+    - media_entity.bundle.wildcat_document
+    - media_entity.bundle.wildcat_gallery
+    - media_entity.bundle.wildcat_image
+    - media_entity.bundle.wildcat_instagram
+    - media_entity.bundle.wildcat_twitter
+    - media_entity.bundle.wildcat_video
+id: media.wildcat_gallery.wildcat_gallery_slide
+field_name: wildcat_gallery_slide
+entity_type: media
+bundle: wildcat_gallery
+label: Slides
+description: 'Media type items for slideshow'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:media'
+  handler_settings:
+    target_bundles:
+      wildcat_document: wildcat_document
+      wildcat_image: wildcat_image
+      wildcat_instagram: wildcat_instagram
+      wildcat_twitter: wildcat_twitter
+      wildcat_video: wildcat_video
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: wildcat_image
+field_type: entity_reference

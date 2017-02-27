@@ -1,0 +1,74 @@
+<?php
+
+/**
+ * @file
+ * Installation and update functions for the Wildcat Media module.
+ */
+
+use Drupal\Core\Config\ExtensionInstallStorage;
+use Drupal\media_entity\Entity\MediaBundle;
+
+/**
+ * Implements hook_install().
+ */
+function wildcat_media_install() {
+  // Disable the media view provided by media_entity.
+  /** @var \Drupal\views\ViewEntityInterface $view */
+  if ($view = \Drupal::entityTypeManager()->getStorage('view')->load('media')) {
+    $view->set('status', FALSE);
+    $view->save();
+  }
+
+  // Ensure cache tags for existing media bundles in media library view.
+  /** @var \Drupal\media_entity\MediaBundleInterface[] $media_bundles */
+  $media_bundles = MediaBundle::loadMultiple();
+  foreach ($media_bundles as $media_bundle) {
+    wildcat_media_media_bundle_insert($media_bundle);
+  }
+
+  // Copy the document icon files.
+  $icons_source = drupal_get_path('module', 'wildcat_media') . '/images/icons';
+  $icons_dest = \Drupal::config('media_entity.settings')->get('icon_base');
+  media_entity_copy_icons($icons_source, $icons_dest);
+
+  if (!\Drupal::isConfigSyncing()) {
+    // Add an icon for the media library browser if we aren't installing from
+    // configuration. Read more about this implementation:
+    // https://www.drupal.org/node/2696593
+    $config_storage = \Drupal::service('config.storage');
+    $button_uuid = (new ExtensionInstallStorage($config_storage))
+      ->read('embed.button.wildcat_media_embed')['icon_uuid'];
+    $button_source = '/images/wildcat-media-browser.png';
+    $button_dest = 'public://wildcat-media-browser.png';
+
+    $button_data = file_get_contents(dirname(__FILE__) . $button_source);
+    $button = file_save_data($button_data, $button_dest, FILE_EXISTS_REPLACE);
+    // Set file uuid same as default config.
+    $button->set('uuid', $button_uuid)->save();
+  }
+
+  // Enable the media embed button and modify filters.
+  $filter_formats = \Drupal::entityTypeManager()
+    ->getStorage('filter_format')
+    ->loadByProperties(array('status' => TRUE));
+  foreach ($filter_formats as $filter_format) {
+    /** @var \Drupal\editor\EditorInterface $editor */
+    $editor = \Drupal::entityTypeManager()
+      ->getStorage('editor')
+      ->load($filter_format->getOriginalId());
+    if ($editor) {
+      // Make the changes to editor and filters only if editor type exists.
+      $editor_settings = $editor->getSettings();
+      $editor_settings['toolbar']['rows'][0][3]['items'][] = 'media';
+      $editor->setSettings($editor_settings);
+      $editor->save();
+      $format = $editor->getFilterFormat();
+      if ($format->filters('filter_html')->settings['allowed_html']) {
+        $format->filters('filter_html')->settings['allowed_html'] .= '<drupal-entity data-entity-type data-entity-uuid data-view-mode data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button>';
+      }
+      $format->setFilterConfig('entity_embed', ['status' => 1]);
+      $format->setFilterConfig('filter_html_image_secure', ['status' => 0]);
+      $format->save();
+    }
+  }
+}

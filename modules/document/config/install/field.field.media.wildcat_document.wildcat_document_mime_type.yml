@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_document_mime_type
+    - media_entity.bundle.wildcat_document
+id: media.wildcat_document.wildcat_document_mime_type
+field_name: wildcat_document_mime_type
+entity_type: media
+bundle: wildcat_document
+label: 'MIME Type'
+description: 'This field stores the mime type of the document.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

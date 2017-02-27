@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - wildcat_media
+  module:
+    - media_entity
+id: media.wildcat_media_gallery
+label: Gallery
+targetEntityType: media
+cache: true

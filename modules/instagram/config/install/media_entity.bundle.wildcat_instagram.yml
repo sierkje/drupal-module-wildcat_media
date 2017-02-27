@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - media_entity_instagram
+id: wildcat_instagram
+label: 'Instagram Post'
+description: 'Use <em>Instagram</em> to embed photos hosted by Instagram.'
+type: instagram
+queue_thumbnail_downloads: false
+new_revision: false
+type_configuration:
+  use_instagram_api: false
+  source_field: wildcat_instagram_url
+  client_id: ''
+field_map:
+  shortcode: wildcat_instagram_shortcode

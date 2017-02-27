@@ -1,0 +1,13 @@
+wildcat_media_video.settings:
+  type: config_object
+  label: 'Settings for the Wildcat Media Video module'
+  mapping:
+    wildcat_gallery_uuid:
+      type: string
+      label: 'UUID of the widget that is added to wildcat_gallery browser'
+    wildcat_media_embed_uuid:
+      type: string
+      label: 'UUID of the widget that is added to wildcat_media_embed browser'
+    wildcat_media_library_uuid:
+      type: string
+      label: 'UUID of the widget that is added to wildcat_media_library browser'

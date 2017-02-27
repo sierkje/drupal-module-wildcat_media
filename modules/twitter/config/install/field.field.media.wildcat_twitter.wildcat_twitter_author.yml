@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.wildcat_twitter_author
+    - media_entity.bundle.wildcat_twitter
+id: media.wildcat_twitter.wildcat_twitter_author
+field_name: wildcat_twitter_author
+entity_type: media
+bundle: wildcat_twitter
+label: 'Tweet author'
+description: 'This field stores the author of the tweet.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

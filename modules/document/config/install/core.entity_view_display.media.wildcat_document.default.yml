@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.wildcat_document.wildcat_document
+    - field.field.media.wildcat_document.wildcat_document_mime_type
+    - field.field.media.wildcat_document.wildcat_document_size
+    - field.field.media.wildcat_document.wildcat_media_reusable
+    - media_entity.bundle.wildcat_document
+  module:
+    - file
+    - user
+id: media.wildcat_document.default
+targetEntityType: media
+bundle: wildcat_document
+mode: default
+content:
+  name:
+    label: hidden
+    type: string
+    weight: 0
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  wildcat_document:
+    type: file_default
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  wildcat_document_size:
+    weight: 4
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+hidden:
+  created: true
+  thumbnail: true
+  uid: true
+  wildcat_document_mime_type: true
+  wildcat_media_reusable: true

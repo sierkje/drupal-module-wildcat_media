@@ -1,0 +1,10 @@
+name: 'Wildcat Media Image'
+type: module
+description: 'Support for uploaded images as media entities on Wildcat-flavored sites.'
+core: 8.x
+package: Wildcat
+dependencies:
+  - dropzonejs_eb_widget
+  - image_widget_crop
+  - media_entity_image
+  - wildcat_media

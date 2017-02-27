@@ -1,0 +1,11 @@
+name: "Wildcat Media"
+type: module
+description: "Improved media handling for Wildcat-flavored sites."
+core: 8.x
+package: Wildcat
+dependencies:
+  - editor
+  - entity_browser_entity_form
+  - entity_embed
+  - media_entity
+  - views_infinite_scroll

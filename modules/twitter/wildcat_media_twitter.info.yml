@@ -1,0 +1,10 @@
+name: 'Wildcat Media Twitter'
+type: module
+description: 'Support for image tweets as media entities on Wildcat-flavored sites.'
+core: 8.x
+package: Wildcat
+dependencies:
+  - entity_browser_entity_form
+  - link
+  - media_entity_twitter
+  - wildcat_media
