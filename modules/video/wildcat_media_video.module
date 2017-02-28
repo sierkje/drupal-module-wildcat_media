@@ -14,7 +14,7 @@ use Drupal\media_entity\Entity\MediaBundle;
 function wildcat_media_video_modules_installed($modules) {
   if (in_array('wildcat_media_gallery', $modules)) {
     if (MediaBundle::load('wildcat_video')) {
-      if ($browser = EntityBrowser::load('wildcat_gallery')) {
+      if ($browser = EntityBrowser::load('wildcat_media_gallery')) {
         // Add our widget to the wildcat_gallery browser.
         $config = _wildcat_media_video_browser_widget_config(-7);
         if ($uuid = $browser->addWidget($config)) {

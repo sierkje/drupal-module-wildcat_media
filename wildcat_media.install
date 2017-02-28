@@ -30,7 +30,6 @@ function wildcat_media_install() {
   $icons_source = drupal_get_path('module', 'wildcat_media') . '/images/icons';
   $icons_dest = \Drupal::config('media_entity.settings')->get('icon_base');
   media_entity_copy_icons($icons_source, $icons_dest);
-
   if (!\Drupal::isConfigSyncing()) {
     // Add an icon for the media library browser if we aren't installing from
     // configuration. Read more about this implementation:
@@ -45,30 +44,5 @@ function wildcat_media_install() {
     $button = file_save_data($button_data, $button_dest, FILE_EXISTS_REPLACE);
     // Set file uuid same as default config.
     $button->set('uuid', $button_uuid)->save();
-  }
-
-  // Enable the media embed button and modify filters.
-  $filter_formats = \Drupal::entityTypeManager()
-    ->getStorage('filter_format')
-    ->loadByProperties(array('status' => TRUE));
-  foreach ($filter_formats as $filter_format) {
-    /** @var \Drupal\editor\EditorInterface $editor */
-    $editor = \Drupal::entityTypeManager()
-      ->getStorage('editor')
-      ->load($filter_format->getOriginalId());
-    if ($editor) {
-      // Make the changes to editor and filters only if editor type exists.
-      $editor_settings = $editor->getSettings();
-      $editor_settings['toolbar']['rows'][0][3]['items'][] = 'media';
-      $editor->setSettings($editor_settings);
-      $editor->save();
-      $format = $editor->getFilterFormat();
-      if ($format->filters('filter_html')->settings['allowed_html']) {
-        $format->filters('filter_html')->settings['allowed_html'] .= '<drupal-entity data-entity-type data-entity-uuid data-view-mode data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button>';
-      }
-      $format->setFilterConfig('entity_embed', ['status' => 1]);
-      $format->setFilterConfig('filter_html_image_secure', ['status' => 0]);
-      $format->save();
-    }
   }
 }

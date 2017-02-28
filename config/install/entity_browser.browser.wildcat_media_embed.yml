@@ -7,7 +7,7 @@ dependencies:
     - media_entity
     - views
 name: wildcat_media_embed
-label: 'Media Embed'
+label: 'Media embed browser'
 display: iframe
 display_configuration:
   width: ''

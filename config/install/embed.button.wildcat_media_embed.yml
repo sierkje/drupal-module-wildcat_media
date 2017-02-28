@@ -6,7 +6,7 @@ dependencies:
   module:
     - entity_embed
     - media_entity
-label: Media
+label: 'Media Browser'
 id: wildcat_media_embed
 type_id: entity
 type_settings:

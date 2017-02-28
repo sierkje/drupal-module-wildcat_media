@@ -47,7 +47,7 @@ function wildcat_media_image_uninstall() {
   // Remove our widgets from entity browsers.
   $settings = \Drupal::configFactory()->get('wildcat_media_image.settings');
   $browser_ids = [
-    'wildcat_gallery',
+    'wildcat_media_gallery',
     'wildcat_media_embed',
     'wildcat_media_library',
   ];

@@ -22,7 +22,7 @@ content:
   wildcat_gallery_slide:
     weight: 1
     settings:
-      entity_browser: wildcat_gallery_library
+      entity_browser: wildcat_media_gallery
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true

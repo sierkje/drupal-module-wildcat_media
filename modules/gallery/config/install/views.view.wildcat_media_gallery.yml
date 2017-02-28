@@ -10,7 +10,7 @@ dependencies:
     - user
     - views_infinite_scroll
     - wildcat_media
-id: wildcat_media_gallery_library
+id: wildcat_media_gallery
 label: 'Wildcat Media Gallery Library'
 module: views
 description: 'Listing of all the media items available for galleries.'

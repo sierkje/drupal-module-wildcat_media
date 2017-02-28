@@ -44,7 +44,7 @@ function wildcat_media_entity_type_alter(array &$entity_types) {
  */
 function wildcat_media_gallery_media_bundle_insert(MediaBundleInterface $bundle) {
   // Add cache tags for the new bundle to the gallery library view.
-  if ($view = View::load('wildcat_media_gallery_library')) {
+  if ($view = View::load('wildcat_media_gallery')) {
     /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
     $displays = $view->get('display');
 
@@ -81,7 +81,7 @@ function wildcat_media_gallery_media_bundle_insert(MediaBundleInterface $bundle)
  */
 function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle) {
   // Remove cache tags for the deleted bundle from the gallery library view.
-  if ($view = View::load('wildcat_media_gallery_library')) {
+  if ($view = View::load('wildcat_media_gallery')) {
     /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
     $displays = $view->get('display');
 
