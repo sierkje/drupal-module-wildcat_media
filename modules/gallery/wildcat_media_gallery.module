@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\media_entity\MediaBundleInterface;
 use Drupal\views\Entity\View;
 
@@ -63,6 +64,16 @@ function wildcat_media_gallery_media_bundle_insert(MediaBundleInterface $bundle)
 
     $view->save();
   }
+
+  // Allow bundle to be selected for wildcat_gallery_slide field.
+  if ($bundle->getType() != 'slideshow') {
+    if ($field = FieldConfig::load('media.wildcat_gallery.wildcat_gallery_slide')) {
+      if ($handler_settings = $field->getSetting('handler_settings')) {
+        $handler_settings[$bundle->id()] = $bundle->id();
+        $field->setSetting('handler_settings', $handler_settings)->save();
+      }
+    }
+  }
 }
 
 /**
@@ -85,5 +96,17 @@ function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle)
     }
 
     $view->save();
+  }
+
+  // Remove bundle option from wildcat_gallery_slide field.
+  if ($bundle->getType() != 'slideshow') {
+    if ($field = FieldConfig::load('media.wildcat_gallery.wildcat_gallery_slide')) {
+      if ($handler_settings = $field->getSetting('handler_settings')) {
+        if (isset($handler_settings[$bundle->id()])) {
+          unset($handler_settings[$bundle->id()]);
+          $field->setSetting('handler_settings', $handler_settings)->save();
+        }
+      }
+    }
   }
 }
