@@ -15,7 +15,6 @@ targetEntityType: media
 bundle: wildcat_instagram
 mode: wildcat_media_library
 content:
-    type: instagram_embed
   name:
     label: hidden
     type: string
@@ -24,8 +23,9 @@ content:
       link_to_entity: true
     third_party_settings: {  }
   wildcat_instagram_url:
-    weight: 1
     label: hidden
+    type: instagram_embed
+    weight: 1
     settings:
       width: 260
       height: 340
