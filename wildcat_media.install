@@ -26,11 +26,6 @@ function wildcat_media_install() {
     wildcat_media_media_bundle_insert($media_bundle);
   }
 
-  // Copy the document icon files.
-  $icons_source = drupal_get_path('module', 'wildcat_media') . '/images/icons';
-  $icons_dest = \Drupal::config('media_entity.settings')->get('icon_base');
-  media_entity_copy_icons($icons_source, $icons_dest);
-
   // Add an icon for the media embed browser, if configuration is not syncing.
   if (!\Drupal::isConfigSyncing()) {
     /** @var \Drupal\Core\Config\StorageInterface $config_storage */

@@ -34,6 +34,11 @@ function wildcat_media_document_install() {
     }
     $embed_browser->save();
   }
+
+  // Copy the document icon files.
+  $source = drupal_get_path('module', 'wildcat_media_document') . '/images';
+  $destination = \Drupal::config('media_entity.settings')->get('icon_base');
+  media_entity_copy_icons($source, $destination);
 }
 
 /**
