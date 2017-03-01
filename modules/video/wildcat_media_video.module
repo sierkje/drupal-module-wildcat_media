@@ -17,8 +17,8 @@ function wildcat_media_video_modules_installed($modules) {
       /** @var \Drupal\entity_browser\EntityBrowserInterface $browser */
       if ($browser = EntityBrowser::load('wildcat_media_gallery')) {
         // Add our widget to the wildcat_gallery browser.
-        $config = wildcat_media_video_browser_widget_config(-7);
-        if ($uuid = $browser->addWidget($config)) {
+        $widget = wildcat_media_video_browser_widget_config();
+        if ($uuid = $browser->addWidget($widget)) {
           \Drupal::configFactory()->getEditable('wildcat_media_video.settings')
             ->set('wildcat_gallery_uuid', $uuid)
             ->save();
@@ -32,17 +32,14 @@ function wildcat_media_video_modules_installed($modules) {
 /**
  * Returns the configuration for the video embed entity browser widget.
  *
- * @param int $weight
- *   Optional weight.
- *
  * @return array
  *   The widget configuration array.
  */
-function wildcat_media_video_browser_widget_config($weight = 0) {
+function wildcat_media_video_browser_widget_config() {
   return [
     'id' => 'entity_form',
     'label' => 'Add video',
-    'weight' => (int) $weight,
+    'weight' => 0,
     'settings' => [
       'entity_type' => 'media',
       'bundle' => 'wildcat_video',

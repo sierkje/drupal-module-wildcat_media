@@ -12,12 +12,13 @@ use Drupal\entity_browser\Entity\EntityBrowser;
  * Implements hook_install().
  */
 function wildcat_media_document_install() {
-  // Add our widget to the wildcat_media_embed browser.
+  /** @var \Drupal\entity_browser\EntityBrowserInterface $embed_browser */
   if ($embed_browser = EntityBrowser::load('wildcat_media_embed')) {
-    $embed_config = [
+    // Add our widget to the wildcat_media_embed browser.
+    $embed_widget_uuid = $embed_browser->addWidget([
       'id' => 'dropzonejs_media_entity',
       'label' => 'Upload document(s)',
-      'weight' => 5,
+      'weight' => 0,
       'settings' => [
         'media_entity_bundle' => 'wildcat_document',
         'upload_location' => 'public://[date:custom:Y]-[date:custom:m]',
@@ -26,10 +27,10 @@ function wildcat_media_document_install() {
         'extensions' => 'csv doc docx odf odp ods odt otp ots ott pdf ppt pptx rtf txt xls xlsx',
         'submit_text' => 'Save document(s)',
       ],
-    ];
-    if ($embed_uuid = $embed_browser->addWidget($embed_config)) {
+    ]);
+    if ($embed_widget_uuid) {
       \Drupal::configFactory()->getEditable('wildcat_media_document.settings')
-        ->set('wildcat_media_embed_uuid', $embed_uuid)
+        ->set('wildcat_media_embed_uuid', $embed_widget_uuid)
         ->save();
     }
     $embed_browser->save();

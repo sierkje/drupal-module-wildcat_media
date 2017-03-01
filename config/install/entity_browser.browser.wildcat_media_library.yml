@@ -23,7 +23,7 @@ widgets:
       view: wildcat_media_library
       view_display: media_select_modal
     uuid: 71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f
-    weight: 1
+    weight: -10
     label: 'All Media'
     id: view
   5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1:
@@ -31,7 +31,7 @@ widgets:
       view: wildcat_media_library
       view_display: user_media_select_modal
     uuid: 5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1
-    weight: 3
+    weight: 10
     label: 'My Media'
     id: view
-submit_text: 'Select media files'
+submit_text: 'Select'

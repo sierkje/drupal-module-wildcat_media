@@ -14,10 +14,10 @@ function wildcat_media_video_install() {
   // Add our widgets to the library and embed browsers.
   $settings = \Drupal::configFactory()
     ->getEditable('wildcat_media_video.settings');
-  foreach (['embed' => 4, 'library' => 3] as $browser_id => $widget_weight) {
+  foreach (['embed', 'library'] as $browser_id) {
     /** @var \Drupal\entity_browser\EntityBrowserInterface $browser */
     if ($browser = EntityBrowser::load('wildcat_media_' . $browser_id)) {
-      $widget = wildcat_media_video_browser_widget_config($widget_weight);
+      $widget = wildcat_media_video_browser_widget_config();
       if ($widget_uuid = $browser->addWidget($widget)) {
         $settings->set('wildcat_media_' . $browser_id . '_uuid', $widget_uuid);
       }

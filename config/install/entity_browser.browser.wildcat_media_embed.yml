@@ -25,7 +25,7 @@ widgets:
       view_display: media_select_modal
       submit_text: 'Select media'
     uuid: 3890425d-604f-47d8-befd-7dee2444de65
-    weight: 1
+    weight: -10
     label: 'All media'
     id: view
   0a1c0b6a-ef29-4de6-a866-a8d372efac0b:
@@ -34,6 +34,7 @@ widgets:
       view_display: user_media_select_modal
       submit_text: 'Select media'
     uuid: 0a1c0b6a-ef29-4de6-a866-a8d372efac0b
-    weight: 2
+    weight: 10
     label: 'My media'
     id: view
+submit_text: 'Embed'

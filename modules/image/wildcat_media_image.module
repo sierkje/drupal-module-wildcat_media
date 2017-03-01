@@ -17,8 +17,9 @@ function wildcat_media_image_modules_installed($modules) {
     if (MediaBundle::load('wildcat_image')) {
       if ($browser = EntityBrowser::load('wildcat_media_gallery')) {
         // Add our widget to the wildcat_gallery browser.
-        $config = _wildcat_media_image_browser_widget_config(-8);
-        if ($uuid = $browser->addWidget($config)) {
+        $widget = wildcat_media_image_browser_widget_config();
+        $widget['weight'] = -5;
+        if ($uuid = $browser->addWidget($widget)) {
           \Drupal::configFactory()->getEditable('wildcat_media_image.settings')
             ->set('wildcat_gallery_uuid', $uuid)
             ->save();
@@ -32,17 +33,14 @@ function wildcat_media_image_modules_installed($modules) {
 /**
  * Returns the configuration for the image upload entity browser widget.
  *
- * @param int $weight
- *   Optional weight.
- *
  * @return array
  *   The widget configuration array.
  */
-function _wildcat_media_image_browser_widget_config($weight = 0) {
+function wildcat_media_image_browser_widget_config() {
   return [
     'id' => 'dropzonejs_media_entity',
     'label' => 'Upload image(s)',
-    'weight' => (int) $weight,
+    'weight' => 0,
     'settings' => [
       'media_entity_bundle' => 'wildcat_image',
       'upload_location' => 'public://[date:custom:Y]-[date:custom:m]',

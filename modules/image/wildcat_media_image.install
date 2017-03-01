@@ -11,31 +11,24 @@ use Drupal\entity_browser\Entity\EntityBrowser;
  * Implements hook_install().
  */
 function wildcat_media_image_install() {
+  // Add our widgets to the library and embed browsers.
   $settings = \Drupal::configFactory()
     ->getEditable('wildcat_media_image.settings');
-
-  // Add our widget to the wildcat_media_embed browser.
-  if ($embed_browser = EntityBrowser::load('wildcat_media_embed')) {
-    $embed_config = _wildcat_media_image_browser_widget_config(3);
-    if ($embed_uuid = $embed_browser->addWidget($embed_config)) {
-      $settings->set('wildcat_media_embed_uuid', $embed_uuid);
+  foreach (['embed' => -5, 'library' => -50] as $browser_id => $widget_weight) {
+    /** @var \Drupal\entity_browser\EntityBrowserInterface $browser */
+    if ($browser = EntityBrowser::load('wildcat_media_' . $browser_id)) {
+      $widget = wildcat_media_image_browser_widget_config();
+      $widget['weight'] = $widget_weight;
+      if ($widget_uuid = $browser->addWidget($widget)) {
+        $settings->set('wildcat_media_' . $browser_id . '_uuid', $widget_uuid);
+      }
+      $browser->save();
     }
-    $embed_browser->save();
   }
-
-  // Add our widget to the wildcat_media_library browser.
-  if ($library_browser = EntityBrowser::load('wildcat_media_library')) {
-    $library_config = _wildcat_media_image_browser_widget_config(0);
-    if ($library_uuid = $library_browser->addWidget($library_config)) {
-      $settings->set('wildcat_media_library_uuid', $library_uuid);
-    }
-    $library_browser->save();
-  }
-
   $settings->save();
 
-  // If the gallery module exists, add our widget to its browser.
   if (\Drupal::moduleHandler()->moduleExists('wildcat_media_gallery')) {
+    // Add our widget to the gallery module browser.
     wildcat_media_image_modules_installed(['wildcat_media_gallery']);
   }
 }
