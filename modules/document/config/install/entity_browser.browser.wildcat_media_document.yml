@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.wildcat_media_document
+  module:
+    - views
+name: wildcat_media_document
+label: 'Media document browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select document'
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  9c145c4a-3a1f-4228-bfc7-599cd0be69af:
+    settings:
+      media_entity_bundle: wildcat_document
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drag and drop files here to upload'
+      extensions: 'csv doc docx odf odp ods odt otp ots ott pdf ppt pptx rtf txt xls xlsx'
+      submit_text: 'Save document(s)'
+    uuid: 9c145c4a-3a1f-4228-bfc7-599cd0be69af
+    weight: -15
+    label: 'Upload document(s)'
+    id: 'dropzonejs_media_entity'
+  2e4abed1-67f6-491f-9de6-788f7b1e0cd8:
+    settings:
+      view: wildcat_media_document
+      view_display: media_select_modal
+    uuid: 2e4abed1-67f6-491f-9de6-788f7b1e0cd8
+    weight: -10
+    label: 'All documents'
+    id: view
+  0274c19b-f44a-46ab-a200-71470326b792:
+    settings:
+      view: wildcat_media_document
+      view_display: user_media_select_modal
+    uuid: 0274c19b-f44a-46ab-a200-71470326b792
+    weight: 10
+    label: 'My documents'
+    id: view
+submit_text: 'Select document'
