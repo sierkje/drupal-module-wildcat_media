@@ -7,22 +7,22 @@
 
 use Drupal\Core\Config\ExtensionInstallStorage;
 use Drupal\media_entity\Entity\MediaBundle;
+use Drupal\views\Entity\View;
 
 /**
  * Implements hook_install().
  */
 function wildcat_media_install() {
-  // Disable the media view provided by media_entity.
   /** @var \Drupal\views\ViewEntityInterface $view */
-  if ($view = \Drupal::entityTypeManager()->getStorage('view')->load('media')) {
-    $view->set('status', FALSE);
+  if ($view = View::load('media')) {
+    // Disable the view provided by media_entity, we provide our own.
+    $view->setStatus(TRUE);
     $view->save();
   }
 
   // Ensure cache tags for existing media bundles in media library view.
-  /** @var \Drupal\media_entity\MediaBundleInterface[] $media_bundles */
-  $media_bundles = MediaBundle::loadMultiple();
-  foreach ($media_bundles as $media_bundle) {
+  /** @var \Drupal\media_entity\MediaBundleInterface $media_bundle */
+  foreach (MediaBundle::loadMultiple() as $media_bundle) {
     wildcat_media_media_bundle_insert($media_bundle);
   }
 
@@ -30,10 +30,10 @@ function wildcat_media_install() {
   $icons_source = drupal_get_path('module', 'wildcat_media') . '/images/icons';
   $icons_dest = \Drupal::config('media_entity.settings')->get('icon_base');
   media_entity_copy_icons($icons_source, $icons_dest);
+
+  // Add an icon for the media embed browser, if configuration is not syncing.
   if (!\Drupal::isConfigSyncing()) {
-    // Add an icon for the media library browser if we aren't installing from
-    // configuration. Read more about this implementation:
-    // https://www.drupal.org/node/2696593
+    /** @var \Drupal\Core\Config\StorageInterface $config_storage */
     $config_storage = \Drupal::service('config.storage');
     $button_uuid = (new ExtensionInstallStorage($config_storage))
       ->read('embed.button.wildcat_media_embed')['icon_uuid'];
@@ -44,5 +44,17 @@ function wildcat_media_install() {
     $button = file_save_data($button_data, $button_dest, FILE_EXISTS_REPLACE);
     // Set file uuid same as default config.
     $button->set('uuid', $button_uuid)->save();
+  }
+}
+
+/**
+ * Implements hook_install().
+ */
+function wildcat_media_uninstall() {
+  /** @var \Drupal\views\ViewEntityInterface $view */
+  if ($view = View::load('media')) {
+    // Enable the view provided by media_entity, it was disabled during install.
+    $view->setStatus(TRUE);
+    $view->save();
   }
 }

@@ -15,7 +15,7 @@ use Drupal\views\ViewExecutable;
  */
 function wildcat_media_form_alter(&$form, FormStateInterface &$form_state) {
   if ($form['#form_id'] == 'entity_browser_wildcat_media_library_form') {
-    // Style the submit button.
+    // Style the submit button of the media library form.
     $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
     $form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';
   }
@@ -27,11 +27,11 @@ function wildcat_media_form_alter(&$form, FormStateInterface &$form_state) {
  * Adds the media.view library to the media views.
  */
 function wildcat_media_views_pre_render(ViewExecutable $view) {
-  if (isset($view) && in_array($view->storage->id(), [
-    'media_library',
-    'global_media_library',
-  ])) {
-    $view->element['#attached']['library'][] = 'wildcat_media/view';
+  if (isset($view)) {
+    $display_ids = ['media_library', 'global_media_library'];
+    if (in_array($view->id(), $display_ids)) {
+      $view->element['#attached']['library'][] = 'wildcat_media/view';
+    }
   }
 }
 
@@ -49,9 +49,7 @@ function wildcat_media_menu_local_actions_alter(&$local_actions) {
  * Implements hook_menu_links_discovered_alter().
  */
 function wildcat_media_menu_links_discovered_alter(&$links) {
-  // Media entity module provides a default view which we disable. Since it also
-  // provides a link entry for it we need to update the route there to point to
-  // the media library we provide.
+  // Update the route that links to the disabled media_entity module view.
   $links['entity.media.collection']['route_name'] = 'view.wildcat_media_library.global_media_library_page';
 }
 
@@ -59,12 +57,10 @@ function wildcat_media_menu_links_discovered_alter(&$links) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function wildcat_media_media_bundle_insert(MediaBundleInterface $bundle) {
-  // Add cache tags for the new bundle to the media library view.
+  /** @var \Drupal\views\ViewEntityInterface $view */
   if ($view = View::load('wildcat_media_library')) {
-    /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
-    $displays = $view->get('display');
-
-    foreach ($displays as $display_id => $display_info) {
+    // Add cache tags for the new bundle to the media library view.
+    foreach ($view->get('display') as $display_id => $display_info) {
       $display = $view->getDisplay($display_id);
       $existing_tags = &$display['cache_metadata']['tags'];
       $new_tags = [
@@ -86,12 +82,10 @@ function wildcat_media_media_bundle_insert(MediaBundleInterface $bundle) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function wildcat_media_media_bundle_delete(MediaBundleInterface $bundle) {
-  // Remove cache tags for the deleted bundle from the media library view.
+  /** @var \Drupal\views\ViewEntityInterface $view */
   if ($view = View::load('wildcat_media_library')) {
-    /** @var \Drupal\views\Plugin\views\display\DisplayPluginBase[] $displays */
-    $displays = $view->get('display');
-
-    foreach ($displays as $display_id => $display_info) {
+    // Remove cache tags for the deleted bundle from the media library view.
+    foreach ($view->get('display') as $display_id => $display_info) {
       $display = $view->getDisplay($display_id);
       $existing_tags = &$display['cache_metadata']['tags'];
       $deleted_tags = [
