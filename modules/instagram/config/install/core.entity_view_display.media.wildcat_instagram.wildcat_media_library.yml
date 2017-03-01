@@ -6,6 +6,7 @@ dependencies:
     - field.field.media.wildcat_instagram.wildcat_instagram_shortcode
     - field.field.media.wildcat_instagram.wildcat_instagram_url
     - field.field.media.wildcat_instagram.wildcat_media_reusable
+    - image.style.wildcat_media_library
     - media_entity.bundle.wildcat_instagram
   module:
     - media_entity_instagram
@@ -20,19 +21,19 @@ content:
     type: string
     weight: 0
     settings:
-      link_to_entity: true
+      link_to_entity: false
     third_party_settings: {  }
-  wildcat_instagram_url:
-    label: hidden
-    type: instagram_embed
+  thumbnail:
+    type: image
     weight: 1
+    label: hidden
     settings:
-      width: 260
-      height: 340
+      image_style: wildcat_media_library
+      image_link: ''
     third_party_settings: {  }
 hidden:
   created: true
-  thumbnail: true
   uid: true
   wildcat_instagram_shortcode: true
+  wildcat_instagram_url: true
   wildcat_media_reusable: true
