@@ -1,0 +1,47 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.wildcat_media_image
+  module:
+    - views
+name: wildcat_media_image
+label: 'Media image browser'
+display: modal
+display_configuration:
+  width: ''
+  height: ''
+  link_text: 'Select image(s)'
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  9c145c4a-3a1f-4228-bfc7-599cd0be69af:
+    settings:
+      media_entity_bundle: wildcat_image
+      upload_location: 'public://[date:custom:Y]-[date:custom:m]'
+      dropzone_description: 'Drag and drop files here to upload'
+      extensions: 'csv doc docx odf odp ods odt otp ots ott pdf ppt pptx rtf txt xls xlsx'
+      submit_text: 'Save image(s)'
+    uuid: 9c145c4a-3a1f-4228-bfc7-599cd0be69af
+    weight: -15
+    label: 'Upload image(s)'
+    id: 'dropzonejs_media_entity'
+  2e4abed1-67f6-491f-9de6-788f7b1e0cd8:
+    settings:
+      view: wildcat_media_image
+      view_display: media_select_modal
+    uuid: 2e4abed1-67f6-491f-9de6-788f7b1e0cd8
+    weight: -10
+    label: 'All images'
+    id: view
+  0274c19b-f44a-46ab-a200-71470326b792:
+    settings:
+      view: wildcat_media_image
+      view_display: user_media_select_modal
+    uuid: 0274c19b-f44a-46ab-a200-71470326b792
+    weight: 10
+    label: 'My images'
+    id: view
+submit_text: 'Select image(s)'
