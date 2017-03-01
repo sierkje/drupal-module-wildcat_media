@@ -14,9 +14,10 @@ use Drupal\media_entity\Entity\MediaBundle;
 function wildcat_media_video_modules_installed($modules) {
   if (in_array('wildcat_media_gallery', $modules)) {
     if (MediaBundle::load('wildcat_video')) {
+      /** @var \Drupal\entity_browser\EntityBrowserInterface $browser */
       if ($browser = EntityBrowser::load('wildcat_media_gallery')) {
         // Add our widget to the wildcat_gallery browser.
-        $config = _wildcat_media_video_browser_widget_config(-7);
+        $config = wildcat_media_video_browser_widget_config(-7);
         if ($uuid = $browser->addWidget($config)) {
           \Drupal::configFactory()->getEditable('wildcat_media_video.settings')
             ->set('wildcat_gallery_uuid', $uuid)
@@ -37,7 +38,7 @@ function wildcat_media_video_modules_installed($modules) {
  * @return array
  *   The widget configuration array.
  */
-function _wildcat_media_video_browser_widget_config($weight = 0) {
+function wildcat_media_video_browser_widget_config($weight = 0) {
   return [
     'id' => 'entity_form',
     'label' => 'Add video',
