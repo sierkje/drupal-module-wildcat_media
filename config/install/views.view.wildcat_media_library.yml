@@ -69,11 +69,16 @@ display:
             button_text: 'Load More'
             automatically_load_content: true
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -338,11 +343,16 @@ display:
           perm: 'access media overview'
       display_description: 'View for the global media library.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item-library
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -1044,11 +1054,16 @@ display:
           plugin_id: rendered_entity
       display_description: 'An entity browser modal to select media.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -1139,11 +1154,16 @@ display:
           perm: 'edit own media content'
       display_description: 'A page on the user profile to display media items by the user.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item-library
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -1844,13 +1864,18 @@ display:
           view_mode: wildcat_media_library
           entity_type: media
           plugin_id: rendered_entity
-      display_description: 'An entity browser modal to select user media'
+      display_description: 'An entity browser modal to select user media.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:

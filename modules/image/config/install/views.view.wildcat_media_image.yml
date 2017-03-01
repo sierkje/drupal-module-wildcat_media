@@ -71,11 +71,16 @@ display:
             button_text: 'Load More'
             automatically_load_content: true
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -631,11 +636,16 @@ display:
           plugin_id: rendered_entity
       display_description: 'An entity browser modal to select image media.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
@@ -981,13 +991,18 @@ display:
           view_mode: wildcat_media_library
           entity_type: media
           plugin_id: rendered_entity
-      display_description: 'An entity browser modal to select user image media'
+      display_description: 'An entity browser modal to select user image media.'
       style:
-        type: default
+        type: grid
         options:
           grouping: {  }
-          row_class: grid-item
-          default_row_class: true
+          columns: 4
+          automatic_width: true
+          alignment: horizontal
+          col_class_default: true
+          col_class_custom: ''
+          row_class_default: true
+          row_class_custom: ''
       row:
         type: fields
         options:
