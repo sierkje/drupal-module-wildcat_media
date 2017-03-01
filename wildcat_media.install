@@ -16,7 +16,7 @@ function wildcat_media_install() {
   /** @var \Drupal\views\ViewEntityInterface $view */
   if ($view = View::load('media')) {
     // Disable the view provided by media_entity, we provide our own.
-    $view->setStatus(TRUE);
+    $view->setStatus(FALSE);
     $view->save();
   }
 
