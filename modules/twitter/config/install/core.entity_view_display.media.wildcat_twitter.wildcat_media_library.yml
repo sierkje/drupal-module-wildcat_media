@@ -24,18 +24,16 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-  thumbnail:
-    type: image
-    weight: 0
+  wildcat_twitter_url:
+    weight: 1
     label: hidden
-    settings:
-      image_style: wildcat_media_library
-      image_link: ''
+    settings: {  }
     third_party_settings: {  }
+    type: twitter_embed
 hidden:
   created: true
+  thumbnail: true
   uid: true
   wildcat_media_reusable: true
   wildcat_twitter_author: true
   wildcat_twitter_id: true
-  wildcat_twitter_url: true
