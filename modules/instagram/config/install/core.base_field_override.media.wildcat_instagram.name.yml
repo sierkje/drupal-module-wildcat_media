@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.bundle.wildcat_instagram
+    - media_entity.bundle.wildcat_instagram
 id: media.wildcat_instagram.name
 field_name: name
 entity_type: media

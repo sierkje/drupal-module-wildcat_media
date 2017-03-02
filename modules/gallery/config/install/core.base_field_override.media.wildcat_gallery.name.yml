@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.bundle.wildcat_gallery
+    - media_entity.bundle.wildcat_gallery
 id: media.wildcat_gallery.name
 field_name: name
 entity_type: media

@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.bundle.wildcat_document
+    - media_entity.bundle.wildcat_document
 id: media.wildcat_document.name
 field_name: name
 entity_type: media

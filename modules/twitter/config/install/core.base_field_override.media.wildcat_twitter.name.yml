@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - media.bundle.wildcat_twitter
+    - media_entity.bundle.wildcat_twitter
 id: media.wildcat_twitter.name
 field_name: name
 entity_type: media
