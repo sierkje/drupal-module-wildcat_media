@@ -7,5 +7,6 @@ dependencies:
   - editor
   - entity_browser_entity_form
   - entity_embed
+  - masonry_views
   - media_entity
   - views_infinite_scroll
