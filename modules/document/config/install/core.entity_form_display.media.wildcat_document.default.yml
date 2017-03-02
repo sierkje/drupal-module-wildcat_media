@@ -14,13 +14,6 @@ targetEntityType: media
 bundle: wildcat_document
 mode: default
 content:
-  name:
-    type: string_textfield
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   wildcat_document:
     weight: 1
     settings:
@@ -35,6 +28,7 @@ content:
     type: boolean_checkbox
 hidden:
   created: true
+  name: true
   uid: true
   wildcat_document_size: true
   wildcat_document_mime_type: true

@@ -32,7 +32,7 @@ content:
     third_party_settings: {  }
     type: entity_browser_entity_reference
   wildcat_media_reusable:
-    weight: 3
+    weight: 2
     settings:
       display_label: true
     third_party_settings: {  }

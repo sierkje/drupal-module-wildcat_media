@@ -14,15 +14,8 @@ targetEntityType: media
 bundle: wildcat_video
 mode: default
 content:
-  name:
-    type: string_textfield
-    weight: 0
-    settings:
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   wildcat_media_reusable:
-    weight: 3
+    weight: 2
     settings:
       display_label: true
     third_party_settings: {  }
@@ -34,6 +27,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  name: true
   uid: true
   wildcat_video_id: true
   wildcat_video_source: true
