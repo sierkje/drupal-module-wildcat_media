@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_video
+id: media.wildcat_video.name
+field_name: name
+entity_type: media
+bundle: wildcat_video
+label: 'Description'
+description: 'Optional description of this video.'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

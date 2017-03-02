@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_image
+id: media.wildcat_image.name
+field_name: name
+entity_type: media
+bundle: wildcat_image
+label: 'Description'
+description: 'Optional description of this image. (If not entered, the file name of the uploaded image will be used.)'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

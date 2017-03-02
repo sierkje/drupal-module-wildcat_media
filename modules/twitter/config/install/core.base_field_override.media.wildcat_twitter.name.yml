@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_twitter
+id: media.wildcat_twitter.name
+field_name: name
+entity_type: media
+bundle: wildcat_twitter
+label: 'Description'
+description: 'Optional description of this tweet. (If not entered, the username of the author plus the ID of the tweet will be used.)'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

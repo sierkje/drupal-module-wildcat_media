@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_document
+id: media.wildcat_document.name
+field_name: name
+entity_type: media
+bundle: wildcat_document
+label: 'Description'
+description: 'Optional description of this document. (If not entered, the file name of the uploaded document will be used.)'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

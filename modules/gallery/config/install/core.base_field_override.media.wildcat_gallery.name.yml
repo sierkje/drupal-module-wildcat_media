@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_gallery
+id: media.wildcat_gallery.name
+field_name: name
+entity_type: media
+bundle: wildcat_gallery
+label: 'Description'
+description: 'Optional description of this gallery. (If not entered, the the gallery was created plus the number of slides will be used.)'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

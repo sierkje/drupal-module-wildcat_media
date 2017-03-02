@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - media.bundle.wildcat_instagram
+id: media.wildcat_instagram.name
+field_name: name
+entity_type: media
+bundle: wildcat_instagram
+label: 'Description'
+description: 'Optional description of this photo. (If not entered, the shortcode of the photo will be used.)'
+required: false
+translatable: true
+default_value:
+  -
+    value: ''
+default_value_callback: ''
+settings:
+  max_length: 255
+field_type: string

@@ -14,13 +14,13 @@ mode: default
 content:
   name:
     type: string_textfield
-    weight: 0
+    weight: 1
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
   wildcat_gallery_slide:
-    weight: 1
+    weight: 0
     settings:
       entity_browser: wildcat_media_gallery
       field_widget_display: rendered_entity
