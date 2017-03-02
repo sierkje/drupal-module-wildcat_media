@@ -9,6 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\field\Entity\FieldConfig;
 use Drupal\media_entity\MediaBundleInterface;
 use Drupal\views\Entity\View;
+use Drupal\views\ViewExecutable;
 
 /**
  * Implements hook_form_alter().
@@ -108,5 +109,24 @@ function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle)
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildcat_media_gallery_form_entity_browser_wildcat_media_gallery_form_alter(&$form, FormStateInterface &$form_state) {
+  wildcat_media_attach_browser_to_form($form);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * Adds the media.view library to the media views.
+ */
+function wildcat_media_gallery_views_pre_render(ViewExecutable $view) {
+  if (isset($view) && $view->id() == 'wildcat_media_gallery') {
+    $view->element['#attached']['library'][] = 'wildcat_media/view';
+    $view->element['#attached']['library'][] = 'wildcat_media/view';
   }
 }

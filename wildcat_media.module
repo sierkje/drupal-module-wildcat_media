@@ -11,14 +11,17 @@ use Drupal\views\Entity\View;
 use Drupal\views\ViewExecutable;
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
-function wildcat_media_form_alter(&$form, FormStateInterface &$form_state) {
-  if ($form['#form_id'] == 'entity_browser_wildcat_media_library_form') {
-    // Style the submit button of the media library form.
-    $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
-    $form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';
-  }
+function wildcat_media_form_entity_browser_wildcat_media_embed_form_alter(&$form, FormStateInterface &$form_state) {
+  wildcat_media_attach_browser_to_form($form);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildcat_media_form_entity_browser_wildcat_media_library_form_alter(&$form, FormStateInterface &$form_state) {
+  wildcat_media_attach_browser_to_form($form);
 }
 
 /**
@@ -27,11 +30,8 @@ function wildcat_media_form_alter(&$form, FormStateInterface &$form_state) {
  * Adds the media.view library to the media views.
  */
 function wildcat_media_views_pre_render(ViewExecutable $view) {
-  if (isset($view)) {
-    $display_ids = ['media_library', 'global_media_library'];
-    if (in_array($view->id(), $display_ids)) {
-      $view->element['#attached']['library'][] = 'wildcat_media/view';
-    }
+  if (isset($view) && $view->id() == 'wildcat_media_library') {
+    $view->element['#attached']['library'][] = 'wildcat_media/view';
   }
 }
 
@@ -97,4 +97,43 @@ function wildcat_media_media_bundle_delete(MediaBundleInterface $bundle) {
 
     $view->save();
   }
+}
+
+/**
+ * Attach the file_browser functionality into a form.
+ *
+ * @param $form
+ *   Nested array of form elements that comprise the form.
+ */
+function wildcat_media_attach_browser_to_form(&$form) {
+  // Style the submit button of the media library form.
+  $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
+  $form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';
+
+  // Wrap actions so we can float them at the bottom of the browser.
+  $form['actions_wrap'] = [
+    '#type' => 'container',
+    '#attributes' => [
+      'class' => ['wildcat-media-browser-actions'],
+    ],
+  ];
+
+  if (isset($form['actions'])) {
+    $form['actions_wrap'][] = $form['actions'];
+    unset($form['actions']);
+  }
+
+  if (isset($form['widget']) && isset($form['widget']['actions'])) {
+    $form['actions_wrap'][] = $form['widget']['actions'];
+    unset($form['widget']['actions']);
+  }
+
+  if (!empty($form['selection_display'])) {
+    $form['selection_display']['#weight'] = 100;
+    $form['actions_wrap'][] = $form['selection_display'];
+    unset($form['selection_display']);
+  }
+
+  // Add a class for generic styling.
+  $form['#attributes']['class'][] = 'wildcat-media-browser-form';
 }

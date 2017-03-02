@@ -30,7 +30,6 @@
     "drupal/entity_embed": "^1.0",
     "drupal/image_widget_crop": "^1.4",
     "drupal/inline_entity_form": "^1.0",
-    "drupal/masonry_views": "^1.0",
     "drupal/media_entity": "^1.0",
     "drupal/media_entity_document": "^1.0",
     "drupal/media_entity_image": "^1.0",

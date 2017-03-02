@@ -1,0 +1,28 @@
+<?php
+
+/**
+ * @file
+ * Support for uploaded documents as media entities on Wildcat-flavored sites.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildcat_media_document_form_entity_browser_wildcat_media_document_form_alter(&$form, FormStateInterface &$form_state) {
+  wildcat_media_attach_browser_to_form($form);
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * Adds the media.view library to the media views.
+ */
+function wildcat_media_document_views_pre_render(ViewExecutable $view) {
+  if (isset($view) && $view->id() == 'wildcat_media_document') {
+    $view->element['#attached']['library'][] = 'wildcat_media/dropzone_css';
+    $view->element['#attached']['library'][] = 'wildcat_media/view';
+  }
+}
