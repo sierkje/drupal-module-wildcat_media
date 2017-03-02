@@ -20,7 +20,7 @@ widgets:
   ec878dd0-0030-43b5-901a-bb07dfed8df3:
     settings:
       view: wildcat_media_gallery
-      view_display: media_select_modal
+      view_display: global_media_select_modal
     uuid: ec878dd0-0030-43b5-901a-bb07dfed8df3
     weight: -10
     label: 'All media'

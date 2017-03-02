@@ -31,7 +31,7 @@ widgets:
   4f124cf0-6a34-4f0b-a47c-6a486b3820bc:
     settings:
       view: wildcat_media_image
-      view_display: media_select_modal
+      view_display: global_media_select_modal
     uuid: 4f124cf0-6a34-4f0b-a47c-6a486b3820bc
     weight: -10
     label: 'All images'

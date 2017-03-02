@@ -774,9 +774,9 @@ display:
         - 'url.query_args:sort_order'
         - user.permissions
       tags: {  }
-  media_select_modal:
+  global_media_select_modal:
     display_plugin: entity_browser
-    id: media_select_modal
+    id: global_media_select_modal
     display_title: 'Media select modal'
     position: 1
     display_options:

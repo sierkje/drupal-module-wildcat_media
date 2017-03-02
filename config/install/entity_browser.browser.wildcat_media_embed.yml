@@ -22,7 +22,7 @@ widgets:
   3890425d-604f-47d8-befd-7dee2444de65:
     settings:
       view: wildcat_media_library
-      view_display: media_select_modal
+      view_display: global_media_select_modal
       submit_text: 'Select media'
     uuid: 3890425d-604f-47d8-befd-7dee2444de65
     weight: -10

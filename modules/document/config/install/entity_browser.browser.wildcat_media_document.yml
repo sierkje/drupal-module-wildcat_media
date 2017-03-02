@@ -31,7 +31,7 @@ widgets:
   2e4abed1-67f6-491f-9de6-788f7b1e0cd8:
     settings:
       view: wildcat_media_document
-      view_display: media_select_modal
+      view_display: global_media_select_modal
     uuid: 2e4abed1-67f6-491f-9de6-788f7b1e0cd8
     weight: -10
     label: 'All documents'

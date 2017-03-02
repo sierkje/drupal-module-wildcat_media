@@ -21,7 +21,7 @@ widgets:
   71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f:
     settings:
       view: wildcat_media_library
-      view_display: media_select_modal
+      view_display: global_media_select_modal
     uuid: 71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f
     weight: -10
     label: 'All Media'
