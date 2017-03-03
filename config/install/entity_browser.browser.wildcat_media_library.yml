@@ -20,7 +20,7 @@ widget_selector_configuration: {  }
 widgets:
   71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f:
     settings:
-      view: wildcat_media_library
+      view: wildcat_media_browser
       view_display: global_media_select_modal
     uuid: 71b5b7eb-b3fc-467e-9b20-2c7ba3faa15f
     weight: -10
@@ -28,7 +28,7 @@ widgets:
     id: view
   5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1:
     settings:
-      view: wildcat_media_library
+      view: wildcat_media_browser
       view_display: user_media_select_modal
     uuid: 5b0b3ee5-6a61-4ebc-821c-f10a8c9c30c1
     weight: 10

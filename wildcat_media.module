@@ -41,8 +41,8 @@ function wildcat_media_views_pre_render(ViewExecutable $view) {
  * Adds the add media button from media_entity on library pages.
  */
 function wildcat_media_menu_local_actions_alter(&$local_actions) {
-  $local_actions['media.add']['appears_on'][] = 'view.wildcat_media_library.user_media_library';
-  $local_actions['media.add']['appears_on'][] = 'view.wildcat_media_library.global_media_library_page';
+  $local_actions['media.add']['appears_on'][] = 'view.wildcat_media_listing.user_media_library_page';
+  $local_actions['media.add']['appears_on'][] = 'view.wildcat_media_listing.global_media_library_page';
 }
 
 /**
@@ -50,7 +50,7 @@ function wildcat_media_menu_local_actions_alter(&$local_actions) {
  */
 function wildcat_media_menu_links_discovered_alter(&$links) {
   // Update the route that links to the disabled media_entity module view.
-  $links['entity.media.collection']['route_name'] = 'view.wildcat_media_library.global_media_library_page';
+  $links['entity.media.collection']['route_name'] = 'view.wildcat_media_listing.global_media_library_page';
 }
 
 /**
@@ -100,9 +100,9 @@ function wildcat_media_media_bundle_delete(MediaBundleInterface $bundle) {
 }
 
 /**
- * Attach the file_browser functionality into a form.
+ * Attach media browser functionality into a form.
  *
- * @param $form
+ * @param array &$form
  *   Nested array of form elements that comprise the form.
  */
 function wildcat_media_attach_browser_to_form(&$form) {

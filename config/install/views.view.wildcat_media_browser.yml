@@ -2,18 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.wildcat_media_library
-    - media_entity.bundle.wildcat_image
+    - core.entity_view_mode.media.wildcat_media_browser
   module:
     - entity_browser
     - media_entity
     - user
     - views_infinite_scroll
-    - wildcat_media
-id: wildcat_media_image
-label: 'Wildcat Media Image Library'
+id: wildcat_media_browser
+label: 'Wildcat Media Library Browser'
 module: views
-description: 'Listing of all the image media items available.'
+description: 'Browse all available media.'
 tag: ''
 base_table: media_field_data
 base_field: mid
@@ -199,7 +197,7 @@ display:
           exposed: true
           expose:
             operator_id: name_op
-            label: 'Image name'
+            label: 'Media name'
             description: ''
             use_operator: false
             operator: name_op
@@ -233,11 +231,10 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: 'in'
-          value:
-            wildcat_image: wildcat_image
+          operator: in
+          value: {  }
           group: 1
-          exposed: false
+          exposed: true
           expose:
             operator_id: bundle_op
             label: Bundle
@@ -393,9 +390,7 @@ display:
         - url.query_args
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
-      tags:
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
+      tags: {  }
   global_media_select_modal:
     display_plugin: entity_browser
     id: global_media_select_modal
@@ -404,7 +399,15 @@ display:
     display_options:
       defaults:
         access: false
-      display_description: 'An entity browser modal to select image media.'
+      fields:
+      display_description: 'An entity browser modal to select media.'
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
       access:
         type: perm
         options:
@@ -418,9 +421,7 @@ display:
         - 'url.query_args:sort_by'
         - 'url.query_args:sort_order'
         - user.permissions
-      tags:
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
+      tags: {  }
   user_media_select_modal:
     display_plugin: entity_browser
     id: user_media_select_modal
@@ -430,7 +431,7 @@ display:
       defaults:
         access: false
         arguments: false
-      display_description: 'An entity browser modal to select user image media.'
+      display_description: 'An entity browser modal to select user media.'
       access:
         type: perm
         options:
@@ -482,6 +483,4 @@ display:
         - 'url.query_args:sort_order'
         - user
         - user.permissions
-      tags:
-        - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.media_library'
+      tags: {  }

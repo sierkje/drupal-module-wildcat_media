@@ -21,7 +21,7 @@ widget_selector_configuration: {  }
 widgets:
   3890425d-604f-47d8-befd-7dee2444de65:
     settings:
-      view: wildcat_media_library
+      view: wildcat_media_browser
       view_display: global_media_select_modal
       submit_text: 'Select media'
     uuid: 3890425d-604f-47d8-befd-7dee2444de65
@@ -30,7 +30,7 @@ widgets:
     id: view
   0a1c0b6a-ef29-4de6-a866-a8d372efac0b:
     settings:
-      view: wildcat_media_library
+      view: wildcat_media_browser
       view_display: user_media_select_modal
       submit_text: 'Select media'
     uuid: 0a1c0b6a-ef29-4de6-a866-a8d372efac0b
