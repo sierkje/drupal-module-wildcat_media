@@ -20,7 +20,7 @@
                 // Save the scroll position.
                 var scroll = document.body.scrollTop;
                 // Remove old Masonry object if it exists. This allows modules like
-                // Views Infinite Scroll to function with File Browser.
+                // Views Infinite Scroll to function with Wildcat Media.
                 if ($view.data('masonry')) {
                     $view.masonry('destroy');
                 }
@@ -38,7 +38,7 @@
                 $view.find('.ajax-progress').remove();
             });
 
-            $('.grid-item').once('bind-click-event').click(function () {
+            $('.grid-item').has('.views-field-entity-browser-select').once('grid-item-click-event').on('click', function () {
                 var input = $(this).find('.views-field-entity-browser-select input');
                 input.prop('checked', !input.prop('checked'));
                 if (input.prop('checked')) {
