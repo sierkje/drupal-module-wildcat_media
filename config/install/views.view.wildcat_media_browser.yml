@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.wildcat_media_browser
+    - core.entity_view_mode.media.wildcat_media_preview
   module:
     - entity_browser
     - media_entity
