@@ -6,7 +6,7 @@
     "use strict";
 
     /**
-     * Registers behaviours related to view widget.
+     * Registers behaviours related to media views.
      */
 
     Drupal.behaviors.WildcatMediaView = {
@@ -36,17 +36,6 @@
                 // Add a class to reveal the loaded images, which avoids FOUC.
                 $('.grid-item').addClass('item-style');
                 $view.find('.ajax-progress').remove();
-            });
-
-            $('.grid-item').has('.views-field-entity-browser-select').once('grid-item-click-event').on('click', function () {
-                var input = $(this).find('.views-field-entity-browser-select input');
-                input.prop('checked', !input.prop('checked'));
-                if (input.prop('checked')) {
-                    $(this).addClass('checked');
-                }
-                else {
-                    $(this).removeClass('checked');
-                }
             });
         }
     };

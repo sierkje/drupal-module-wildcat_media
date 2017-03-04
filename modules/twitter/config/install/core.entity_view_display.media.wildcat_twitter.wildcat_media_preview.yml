@@ -2,20 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.wildcat_media_library
+    - core.entity_view_mode.media.wildcat_media_preview
     - field.field.media.wildcat_twitter.wildcat_media_reusable
     - field.field.media.wildcat_twitter.wildcat_twitter_author
     - field.field.media.wildcat_twitter.wildcat_twitter_id
     - field.field.media.wildcat_twitter.wildcat_twitter_url
-    - image.style.wildcat_media_library
+    - image.style.wildcat_media_thumbnail
     - media_entity.bundle.wildcat_twitter
   module:
     - media_entity_twitter
     - user
-id: media.wildcat_twitter.wildcat_media_library
+id: media.wildcat_twitter.wildcat_media_preview
 targetEntityType: media
 bundle: wildcat_twitter
-mode: wildcat_media_library
+mode: wildcat_media_preview
 content:
   name:
     label: hidden

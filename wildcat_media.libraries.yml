@@ -11,11 +11,15 @@ view:
     - wildcat_media/imagesloaded
     - wildcat_media/masonry
 
-dropzone_css:
+browser:
   version: VERSION
+  js:
+    js/wildcat_media.browser.js: {}
   css:
     theme:
-      css/wildcat_media.dropzone.css: {}
+      css/wildcat_media.browser.css: {}
+  dependencies:
+    - wildcat_media/view
 
 imagesloaded:
   remote: https://github.com/desandro/imagesloaded

@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.wildcat_media_library
+    - core.entity_view_mode.media.wildcat_media_preview
     - field.field.media.wildcat_gallery.wildcat_gallery_slide
     - field.field.media.wildcat_gallery.wildcat_media_reusable
-    - image.style.wildcat_media_library
+    - image.style.wildcat_media_thumbnail
     - media_entity.bundle.wildcat_gallery
   module:
     - image
     - user
-id: media.wildcat_gallery.wildcat_media_library
+id: media.wildcat_gallery.wildcat_media_preview
 targetEntityType: media
 bundle: wildcat_gallery
-mode: wildcat_media_library
+mode: wildcat_media_preview
 content:
   name:
     type: string
@@ -27,7 +27,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: wildcat_media_library
+      image_style: wildcat_media_thumbnail
       image_link: ''
     third_party_settings: {  }
 hidden:

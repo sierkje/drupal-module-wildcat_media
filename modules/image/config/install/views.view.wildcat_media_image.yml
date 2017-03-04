@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.media.wildcat_media_library
+    - core.entity_view_mode.media.wildcat_media_preview
     - media_entity.bundle.wildcat_image
   module:
     - entity_browser
@@ -182,7 +182,7 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          view_mode: wildcat_media_library
+          view_mode: wildcat_media_preview
           entity_type: media
           plugin_id: rendered_entity
       filters:

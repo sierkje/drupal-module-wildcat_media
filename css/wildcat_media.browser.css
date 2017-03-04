@@ -1,0 +1,69 @@
+/**
+* @file wildcat-media.view.css
+*/
+
+
+/* Generic styles */
+
+.grid-item.checked {
+    border: 2px solid #37802f;
+}
+
+.grid-item .views-field-entity-browser-select {
+    display: none;
+}
+
+.grid-item.checked:after {
+    background-size: 54px 54px;
+}
+
+.wildcat-media-browser-form {
+    position: relative;
+    padding-bottom: 100px;
+}
+
+
+/* Remove border above tabs. */
+
+.wildcat-media-browser-form .is-collapse-enabled .tabs:before,
+.wildcat-media-browser-form .is-horizontal .tabs:before {
+    background-color: transparent;
+}
+
+.wildcat-media-browser-actions {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+    padding: 10px;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #b8b8b8;
+}
+
+/* Dropzone styles */
+
+.dropzone .dz-preview .dz-success-mark {
+    background: transparent url("../images/checkmark.svg") no-repeat center center;
+    background-size: 100% 100%;
+    width: 54px;
+    height: 54px;
+    top: -20px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.dropzone .dz-preview .dz-error-mark {
+    width: 54px;
+    height: 54px;
+    top: -20px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+div.dz-preview > div.dz-success-mark > svg > g {
+    display: none;
+}

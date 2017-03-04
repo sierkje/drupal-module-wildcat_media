@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - views.view.wildcat_media_library
+    - views.view.wildcat_media_browser
   module:
     - views
 name: wildcat_media_library

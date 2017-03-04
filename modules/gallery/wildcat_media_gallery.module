@@ -12,20 +12,19 @@ use Drupal\views\Entity\View;
 use Drupal\views\ViewExecutable;
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
-function wildcat_media_gallery_form_alter(&$form, FormStateInterface &$form_state) {
+function wildcat_media_gallery_views_exposed_form_wildcat_media_gallery_global_media_select_modal_form_alter(&$form, FormStateInterface &$form_state) {
   // Remove the Gallery option from create gallery view's bundle filters.
-  if (in_array($form['#id'], [
-    'views-exposed-form-wildcat-media-gallery-library-media-select-modal',
-    'views-exposed-form-wildcat-media-gallery-library-user-media-select-modal',
-  ])) {
-    unset($form['bundle_1']['#options']['gallery']);
-  }
+  unset($form['bundle_1']['#options']['gallery']);
+}
 
-  if ($form['#form_id'] == 'media_wildcat_gallery_form') {
-    $form['#attached']['library'][] = 'wildcat_media/view';
-  }
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function wildcat_media_gallery_views_exposed_form_wildcat_media_gallery_user_media_select_modal_form_alter(&$form, FormStateInterface &$form_state) {
+  // Remove the Gallery option from create gallery view's bundle filters.
+  unset($form['bundle_1']['#options']['gallery']);
 }
 
 /**
@@ -54,7 +53,7 @@ function wildcat_media_gallery_media_bundle_insert(MediaBundleInterface $bundle)
       $existing_tags = &$display['cache_metadata']['tags'];
       $new_tags = [
         "config:core.entity_view_display.media.{$bundle->id()}.default",
-        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
+        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_preview",
       ];
       foreach ($new_tags as $new_tag) {
         if (!in_array($new_tag, $existing_tags)) {
@@ -91,7 +90,7 @@ function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle)
       $existing_tags = &$display['cache_metadata']['tags'];
       $deleted_tags = [
         "config:core.entity_view_display.media.{$bundle->id()}.default",
-        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
+        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_preview",
       ];
       $existing_tags = array_diff($existing_tags, $deleted_tags);
     }
@@ -116,7 +115,7 @@ function wildcat_media_gallery_media_bundle_delete(MediaBundleInterface $bundle)
  * Implements hook_form_FORM_ID_alter().
  */
 function wildcat_media_gallery_form_entity_browser_wildcat_media_gallery_form_alter(&$form, FormStateInterface &$form_state) {
-  wildcat_media_attach_browser_to_form($form);
+  wildcat_media_customize_media_browser_form($form);
 }
 
 /**
@@ -126,7 +125,6 @@ function wildcat_media_gallery_form_entity_browser_wildcat_media_gallery_form_al
  */
 function wildcat_media_gallery_views_pre_render(ViewExecutable $view) {
   if (isset($view) && $view->id() == 'wildcat_media_gallery') {
-    $view->element['#attached']['library'][] = 'wildcat_media/view';
-    $view->element['#attached']['library'][] = 'wildcat_media/view';
+    $view->element['#attached']['library'][] = 'wildcat_media/browser';
   }
 }

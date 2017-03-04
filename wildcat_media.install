@@ -20,7 +20,7 @@ function wildcat_media_install() {
     $view->save();
   }
 
-  // Ensure cache tags for existing media bundles in media library view.
+  // Ensure cache tags for existing media bundles our view displays.
   /** @var \Drupal\media_entity\MediaBundleInterface $media_bundle */
   foreach (MediaBundle::loadMultiple() as $media_bundle) {
     wildcat_media_media_bundle_insert($media_bundle);

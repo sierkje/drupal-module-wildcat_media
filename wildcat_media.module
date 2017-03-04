@@ -14,14 +14,14 @@ use Drupal\views\ViewExecutable;
  * Implements hook_form_FORM_ID_alter().
  */
 function wildcat_media_form_entity_browser_wildcat_media_embed_form_alter(&$form, FormStateInterface &$form_state) {
-  wildcat_media_attach_browser_to_form($form);
+  wildcat_media_customize_media_browser_form($form);
 }
 
 /**
  * Implements hook_form_FORM_ID_alter().
  */
 function wildcat_media_form_entity_browser_wildcat_media_library_form_alter(&$form, FormStateInterface &$form_state) {
-  wildcat_media_attach_browser_to_form($form);
+  wildcat_media_customize_media_browser_form($form);
 }
 
 /**
@@ -30,7 +30,10 @@ function wildcat_media_form_entity_browser_wildcat_media_library_form_alter(&$fo
  * Adds the media.view library to the media views.
  */
 function wildcat_media_views_pre_render(ViewExecutable $view) {
-  if (isset($view) && $view->id() == 'wildcat_media_library') {
+  if (isset($view) && $view->id() == 'wildcat_media_embed') {
+    $view->element['#attached']['library'][] = 'wildcat_media/browser';
+  }
+  if (isset($view) && $view->id() == 'wildcat_media_listing') {
     $view->element['#attached']['library'][] = 'wildcat_media/view';
   }
 }
@@ -57,24 +60,26 @@ function wildcat_media_menu_links_discovered_alter(&$links) {
  * Implements hook_ENTITY_TYPE_insert().
  */
 function wildcat_media_media_bundle_insert(MediaBundleInterface $bundle) {
-  /** @var \Drupal\views\ViewEntityInterface $view */
-  if ($view = View::load('wildcat_media_library')) {
-    // Add cache tags for the new bundle to the media library view.
-    foreach ($view->get('display') as $display_id => $display_info) {
-      $display = $view->getDisplay($display_id);
-      $existing_tags = &$display['cache_metadata']['tags'];
-      $new_tags = [
-        "config:core.entity_view_display.media.{$bundle->id()}.default",
-        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
-      ];
-      foreach ($new_tags as $new_tag) {
-        if (!in_array($new_tag, $existing_tags)) {
-          $existing_tags[] = $new_tag;
+  // Add cache tags for the new bundle to our view displays.
+  foreach (['wildcat_media_listing', 'wildcat_media_browser'] as $view_id) {
+    /** @var \Drupal\views\ViewEntityInterface $view */
+    if ($view = View::load($view_id)) {
+      foreach ($view->get('display') as $display_id => $display_info) {
+        $display = $view->getDisplay($display_id);
+        $existing_tags = &$display['cache_metadata']['tags'];
+        $new_tags = [
+          "config:core.entity_view_display.media.{$bundle->id()}.default",
+          "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_preview",
+        ];
+        foreach ($new_tags as $new_tag) {
+          if (!in_array($new_tag, $existing_tags)) {
+            $existing_tags[] = $new_tag;
+          }
         }
       }
-    }
 
-    $view->save();
+      $view->save();
+    }
   }
 }
 
@@ -82,30 +87,32 @@ function wildcat_media_media_bundle_insert(MediaBundleInterface $bundle) {
  * Implements hook_ENTITY_TYPE_delete().
  */
 function wildcat_media_media_bundle_delete(MediaBundleInterface $bundle) {
-  /** @var \Drupal\views\ViewEntityInterface $view */
-  if ($view = View::load('wildcat_media_library')) {
-    // Remove cache tags for the deleted bundle from the media library view.
-    foreach ($view->get('display') as $display_id => $display_info) {
-      $display = $view->getDisplay($display_id);
-      $existing_tags = &$display['cache_metadata']['tags'];
-      $deleted_tags = [
-        "config:core.entity_view_display.media.{$bundle->id()}.default",
-        "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_library",
-      ];
-      $existing_tags = array_diff($existing_tags, $deleted_tags);
-    }
+  // Remove cache tags for the deleted bundle from our view displays.
+  foreach (['wildcat_media_listing', 'wildcat_media_browser'] as $view_id) {
+    /** @var \Drupal\views\ViewEntityInterface $view */
+    if ($view = View::load($view_id)) {
+      foreach ($view->get('display') as $display_id => $display_info) {
+        $display = $view->getDisplay($display_id);
+        $existing_tags = &$display['cache_metadata']['tags'];
+        $deleted_tags = [
+          "config:core.entity_view_display.media.{$bundle->id()}.default",
+          "config:core.entity_view_display.media.{$bundle->id()}.wildcat_media_preview",
+        ];
+        $existing_tags = array_diff($existing_tags, $deleted_tags);
+      }
 
-    $view->save();
+      $view->save();
+    }
   }
 }
 
 /**
- * Attach media browser functionality into a form.
+ * Customize media browser form.
  *
  * @param array &$form
  *   Nested array of form elements that comprise the form.
  */
-function wildcat_media_attach_browser_to_form(&$form) {
+function wildcat_media_customize_media_browser_form(&$form) {
   // Style the submit button of the media library form.
   $form['actions']['submit']['#attributes']['class'][] = 'button--primary';
   $form['actions']['submit']['#attributes']['class'][] = 'entity-browser-modal-target';

@@ -59,7 +59,7 @@ function wildcat_media_image_browser_widget_config() {
  * Implements hook_form_FORM_ID_alter().
  */
 function wildcat_media_image_form_entity_browser_wildcat_media_image_form_alter(&$form, FormStateInterface &$form_state) {
-  wildcat_media_attach_browser_to_form($form);
+  wildcat_media_customize_media_browser_form($form);
 }
 
 /**
