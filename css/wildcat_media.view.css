@@ -101,7 +101,8 @@
     transition: all 0.2s;
 }
 
-.grid-item-info {
+.grid-item-info,
+.field-name--name {
     position: absolute;
     z-index: 1;
     width: 100%;
