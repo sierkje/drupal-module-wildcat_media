@@ -22,8 +22,8 @@ widgets:
       media_entity_bundle: wildcat_image
       upload_location: 'public://[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drag and drop files here to upload'
-      extensions: 'csv doc docx odf odp ods odt otp ots ott pdf ppt pptx rtf txt xls xlsx'
-      submit_text: 'Save image(s)'
+      extensions: 'png gif jpg jpeg'
+      submit_text: 'Use image(s)'
     uuid: 932871ac-3104-49fd-a5ff-bc0d5611e4b2
     weight: -15
     label: 'Upload image(s)'
