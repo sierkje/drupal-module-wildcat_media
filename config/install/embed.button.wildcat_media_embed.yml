@@ -12,7 +12,8 @@ type_id: entity
 type_settings:
   entity_type: media
   bundles: {  }
-  display_plugins: {  }
+  display_plugins:
+    - 'view_mode:media.wildcat_media_gallery'
   entity_browser: wildcat_media_embed
   entity_browser_settings:
     display_review: false
