@@ -6,7 +6,7 @@ dependencies:
       - wildcat_media
   module:
     - media_entity
-id: media.wildcat_media_gallery
+id: media.wildcat_media_embed
 label: Gallery
 targetEntityType: media
 cache: true

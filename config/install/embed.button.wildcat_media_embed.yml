@@ -13,7 +13,7 @@ type_settings:
   entity_type: media
   bundles: {  }
   display_plugins:
-    - 'view_mode:media.wildcat_media_gallery'
+    - 'view_mode:media.wildcat_media_embed'
   entity_browser: wildcat_media_embed
   entity_browser_settings:
     display_review: false
