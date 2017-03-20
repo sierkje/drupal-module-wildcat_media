@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.wildcat_media_embed
+    - field.field.media.wildcat_image.wildcat_image
+    - field.field.media.wildcat_image.wildcat_media_reusable
+    - image.style.wildcat_image_crop
+    - media_entity.bundle.wildcat_image
+  module:
+    - image
+    - user
+id: media.wildcat_image.wildcat_media_embed
+targetEntityType: media
+bundle: wildcat_image
+mode: wildcat_media_embed
+content:
+  wildcat_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: wildcat_image_crop
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true
+  wildcat_media_reusable: true

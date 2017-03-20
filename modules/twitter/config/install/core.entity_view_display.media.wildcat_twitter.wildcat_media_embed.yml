@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.wildcat_media_embed
+    - field.field.media.wildcat_twitter.wildcat_media_reusable
+    - field.field.media.wildcat_twitter.wildcat_twitter_author
+    - field.field.media.wildcat_twitter.wildcat_twitter_id
+    - field.field.media.wildcat_twitter.wildcat_twitter_url
+    - media_entity.bundle.wildcat_twitter
+  module:
+    - media_entity_twitter
+    - user
+id: media.wildcat_twitter.wildcat_media_embed
+targetEntityType: media
+bundle: wildcat_twitter
+mode: wildcat_media_embed
+content:
+  wildcat_twitter_url:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: twitter_embed
+hidden:
+  created: true
+  name: true
+  thumbnail: true
+  uid: true
+  wildcat_media_reusable: true
+  wildcat_twitter_author: true
+  wildcat_twitter_id: true
